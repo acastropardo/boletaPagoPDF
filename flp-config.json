@@ -1,0 +1,34 @@
+{
+    "application": {
+        "id": "",
+        "title": "pdf.ZHR_TEST_BOLETA_PAGO.ZHR_TEST_BOLETA_PAGO",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#ZHR_TEST_BOLETA_PAGO-Display",
+        "navigationComponentName": "pdf.ZHR_TEST_BOLETA_PAGO",
+        "intentSemanticObject": "ZHR_TEST_BOLETA_PAGO",
+        "intentAction": "Display",
+        "html5ApplicationName": "ztestpdf",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "e2295099-6349-4d74-9095-2b5b64109a17"
+        ],
+        "contentPackages": [
+            "9fbab597-bf88-4e0c-95d5-2c19f93bab07"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Boleta de Pago PHR TEST",
+        "subtitle": "Boleta de pago PDF",
+        "searchKeywords": "Boleta de Pago PHR TEST,Boleta de pago PDF",
+        "displayIconUrl": "sap-icon://approvals",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

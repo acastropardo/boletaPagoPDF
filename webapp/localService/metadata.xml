@@ -1,0 +1,41 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZHR_TEST_PDF_SRV" xml:lang="es" sap:schema-version="1">
+			<EntityType Name="boletaPago" sap:content-version="1">
+				<Key><PropertyRef Name="Pernr"/><PropertyRef Name="Seqnr"/></Key><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Nº personal"/><Property Name="Seqnr" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Nº reg.infotipo"/><Property Name="Pabrp" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Nº de dos pos."/><Property Name="Pabrj" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Contador"/></EntityType>
+			<EntityType Name="empleado" m:HasStream="true" sap:content-version="1">
+				<Key><PropertyRef Name="Employeenumber"/></Key><Property Name="Employeenumber" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Nº personal"/><Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Nom.empl./cand."/><Property Name="Mimetype" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Car.20"/><NavigationProperty Name="toPeriodos" Relationship="ZHR_TEST_PDF_SRV.empleadoPeriodo" FromRole="FromRole_empleadoPeriodo"
+					ToRole="ToRole_empleadoPeriodo"/></EntityType>
+			<EntityType Name="periodos" sap:content-version="1">
+				<Key><PropertyRef Name="Seqnr"/></Key><Property Name="Permo" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Nº de dos pos." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Seqnr" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Nº reg.infotipo"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false"/><Property Name="Pernr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Nº personal" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Vabrj" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Contador" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Pabrj" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Nº de dos pos." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Vabrp" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Nº de dos pos." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><Property Name="Pabrp" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Contador" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false"/><NavigationProperty Name="ToPeriodo" Relationship="ZHR_TEST_PDF_SRV.periodoPeriodoLineItem" FromRole="FromRole_periodoPeriodoLineItem"
+					ToRole="ToRole_periodoPeriodoLineItem"/><NavigationProperty Name="ToPeriodoLineItem" Relationship="ZHR_TEST_PDF_SRV.periodoPeriodoLineItem"
+					FromRole="FromRole_periodoPeriodoLineItem" ToRole="ToRole_periodoPeriodoLineItem"/><NavigationProperty Name="toEmpleado" Relationship="ZHR_TEST_PDF_SRV.empleadoPeriodo" FromRole="ToRole_empleadoPeriodo"
+					ToRole="FromRole_empleadoPeriodo"/></EntityType>
+			<Association Name="periodoPeriodoLineItem" sap:content-version="1"><End Type="ZHR_TEST_PDF_SRV.periodos" Multiplicity="1" Role="FromRole_periodoPeriodoLineItem"/><End Type="ZHR_TEST_PDF_SRV.periodos" Multiplicity="*" Role="ToRole_periodoPeriodoLineItem"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_periodoPeriodoLineItem"><PropertyRef Name="Seqnr"/></Principal>
+					<Dependent Role="ToRole_periodoPeriodoLineItem"><PropertyRef Name="Seqnr"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="empleadoPeriodo" sap:content-version="1"><End Type="ZHR_TEST_PDF_SRV.empleado" Multiplicity="1" Role="FromRole_empleadoPeriodo"/><End Type="ZHR_TEST_PDF_SRV.periodos" Multiplicity="*" Role="ToRole_empleadoPeriodo"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_empleadoPeriodo"><PropertyRef Name="Employeenumber"/></Principal>
+					<Dependent Role="ToRole_empleadoPeriodo"><PropertyRef Name="Pernr"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZHR_TEST_PDF_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="boletaPagoCollection" EntityType="ZHR_TEST_PDF_SRV.boletaPago" sap:searchable="true" sap:content-version="1"/><EntitySet Name="empleadoCollection" EntityType="ZHR_TEST_PDF_SRV.empleado" sap:searchable="true" sap:content-version="1"/><EntitySet Name="periodosCollection" EntityType="ZHR_TEST_PDF_SRV.periodos" sap:searchable="true" sap:content-version="1"/>
+				<AssociationSet Name="empleadoPeriodoSet" Association="ZHR_TEST_PDF_SRV.empleadoPeriodo" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="empleadoCollection" Role="FromRole_empleadoPeriodo"/><End EntitySet="periodosCollection" Role="ToRole_empleadoPeriodo"/></AssociationSet>
+				<AssociationSet Name="periodoPeriodoLineItemSet" Association="ZHR_TEST_PDF_SRV.periodoPeriodoLineItem" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="periodosCollection" Role="FromRole_periodoPeriodoLineItem"/><End EntitySet="periodosCollection" Role="ToRole_periodoPeriodoLineItem"/></AssociationSet>
+			</EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZHR_TEST_PDF_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZHR_TEST_PDF_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

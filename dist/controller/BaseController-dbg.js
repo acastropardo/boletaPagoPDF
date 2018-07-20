@@ -6,6 +6,7 @@ sap.ui.define([
 		"use strict";
 
 		return Controller.extend("pdf.ZHR_TEST_BOLETA_PAGO.controller.BaseController", {
+			sso: {},
 			/**
 			 * Convenience method for accessing the router in every controller of the application.
 			 * @public

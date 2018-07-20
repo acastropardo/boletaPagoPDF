@@ -1,13 +1,11 @@
-<mvc:View controllerName="pdf.ZHR_TEST_BOLETA_PAGO.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.m.semantic">
-	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
-		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" controllerName="pdf.ZHR_TEST_BOLETA_PAGO.controller.Detail">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
-			<ObjectHeader id="objectHeader" title="{Vabrp} - {Vabrj}"></ObjectHeader>
+			<ObjectHeader id="objectHeader" title="{Vabrp} - {Vabrj}" intro="{/#empleado/Name/@sap:label}"/>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
-					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}"></IconTabFilter>
-					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}"></IconTabFilter>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}"/>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}"/>
 				</items>
 			</IconTabBar>
 
@@ -16,13 +14,12 @@
 			<!--          <FlexItemData growFactor="1" />-->
 			<!--        </layoutData>-->
 			<!--      </PDFViewer>-->
-						<PDFViewer id="PDFViewer"  title="{Vabrp} - {Vabrj}" height="{/Height}">
+						<PDFViewer id="PDFViewer" title="{Vabrp} - {Vabrj}" height="{/Height}">
 			        <layoutData>
-			          <FlexItemData growFactor="1" />
+			          <FlexItemData growFactor="1"/>
 			        </layoutData>
 			      </PDFViewer>
-			<Table id="lineItemsList" width="auto" items="{ToPeriodo}" updateFinished="onListUpdateFinished"
-				noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+			<Table id="lineItemsList" width="auto" items="{ToPeriodo}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
 				<headerToolbar>
 					<Toolbar id="lineItemsToolbar">
 						<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>

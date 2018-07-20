@@ -146,6 +146,7 @@ sap.ui.define([
 			oViewModel.setProperty("/shareSendEmailMessage",
 				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
 			this._onCargaPDF(oObject.Seqnr, oObject.Pernr, oObject.Vabrp, oObject.Vabrj);
+			this._onInstanciaSSO();
 		},
 
 		_onMetadataLoaded: function () {
@@ -170,6 +171,27 @@ sap.ui.define([
 			// Restore original busy indicator delay for the detail view
 			oViewModel.setProperty("/delay", iOriginalViewBusyDelay);
 		},
+		
+		_onInstanciaSSO: function(){
+							var sURI = '/sfsf';
+				var oModel = new sap.ui.model.odata.ODataModel(sURI, false);
+		
+				
+				this.getModel().read("/getPeopleProfileHeader", {
+				success: function(oData){
+					oModel.read("/User('"+oData.results[0].targetUserId+"')",{
+						success: function(oData){
+							//that.busyDialog.close();
+							
+							this.sso.empId = oData.empId;
+						}
+					});
+				},
+				filters: [  ] 
+			});
+			
+		},
+		
 		_onCargaPDF: function (seqnr, pernr, pabrp, pabrj) {
 			sap.m.MessageToast.show("Pernr: "+ pernr +" Año: " + pabrj + " Mes: " + pabrp, {
 				duration: 3000, // default
@@ -185,7 +207,9 @@ sap.ui.define([
 				animationDuration: 1000, // default
 				closeOnBrowserNavigation: true // default
 			});
-			var url = "/sap/opu/odata/sap/ZHR_TEST_PDF_SRV/empleadoCollection('30010000')/$value";
+			//var url = "/sap/opu/odata/sap/ZHR_TEST_PDF_SRV/empleadoCollection(Employeenumber='30009203',Pabrp='02',Pabrj='2015')/$value";
+			var url = "/sap/opu/odata/sap/ZHR_TEST_PDF_SRV/empleadoCollection(Employeenumber='"+pernr+"',Pabrp='"+pabrp+"',Pabrj='"+pabrj+"')/$value";
+			//sap.m.MessageToast.show(url);
 			var oModelPDF = new JSONModel({
 				Source: url,
 				Title: "Documento PDF",

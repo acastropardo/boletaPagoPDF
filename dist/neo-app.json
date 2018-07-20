@@ -44,6 +44,15 @@
         "entryPath": "/sap/opu/odata"
       },
       "description": "GW_KAUFMANN"
+    },
+    {
+      "path": "/sfsf",
+      "target": {
+        "type": "destination",
+        "name": "sap_hcmcloud_core_odata_LS",
+        "entryPath": "/sfsf"
+      },
+      "description": "API SFSF"
     }
   ],
   "welcomeFile": "/index.html",

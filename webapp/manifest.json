@@ -10,6 +10,13 @@
 			"version": "1.0.0"
 		},
 		"dataSources": {
+			"api_sfsf": {
+				"uri": "/sfsf",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
 			"mainService": {
 				"uri": "/sap/opu/odata/sap/ZHR_TEST_PDF_SRV/",
 				"type": "OData",
@@ -67,6 +74,10 @@
 			},
 			"": {
 				"dataSource": "mainService",
+				"preload": true
+			},
+			"sfsf": {
+				"dataSource": "api_sfsf",
 				"preload": true
 			}
 		},
@@ -132,6 +143,10 @@
 	},
 	"sap.platform.hcp": {
 		"uri": "webapp",
+		"_version": "1.1.0"
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zhr_boleta_pago/webapp",
 		"_version": "1.1.0"
 	}
 }
